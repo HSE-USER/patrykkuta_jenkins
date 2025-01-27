@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pat-week12jenkins
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: pat-week12jenkins
+  template:
+    metadata:
+      labels:
+        app: pat-week12jenkins
+    spec:
+      containers:
+        - name: pat-week12jenkins
+          image: hopemcsese/pat-week12jenkins:latest
+          ports:
+            - containerPort: 8080
